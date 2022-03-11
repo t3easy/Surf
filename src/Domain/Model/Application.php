@@ -33,6 +33,11 @@ class Application
     protected string $name;
 
     /**
+     * Packages installed in this app
+     */
+    protected array $packages = [];
+
+    /**
      * The nodes for this application
      * @var Node[]
      */
@@ -79,6 +84,18 @@ class Application
         $this->name = $name;
 
         return $this;
+    }
+
+    public function setPackages(array $packages): self
+    {
+        $this->packages = $packages;
+
+        return $this;
+    }
+
+    public function getPackages(): array
+    {
+        return $this->packages;
     }
 
     /**

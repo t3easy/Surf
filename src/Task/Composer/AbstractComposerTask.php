@@ -44,6 +44,11 @@ abstract class AbstractComposerTask extends Task implements ShellCommandServiceA
      */
     protected array $suffix = ['2>&1'];
 
+    /**
+     * Output of the composer command
+     */
+    protected string $output = '';
+
     public function execute(Node $node, Application $application, Deployment $deployment, array $options = []): void
     {
         $options = $this->configureOptions($options);
@@ -63,7 +68,7 @@ abstract class AbstractComposerTask extends Task implements ShellCommandServiceA
 
         if ($this->composerManifestExists($composerRootPath, $node, $deployment)) {
             $commands = $this->buildComposerCommands($composerRootPath, $options);
-            $this->shell->executeOrSimulate($commands, $node, $deployment);
+            $this->output = $this->shell->executeOrSimulate($commands, $node, $deployment);
         }
     }
 
